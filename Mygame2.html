@@ -1,0 +1,385 @@
+<html> 
+<head> 
+
+<script language="JavaScript">
+/*Agenda
+1. Make a list of questons for the user, maybe i can but it in the top box
+2. Select correct logical fallacy and answer and way to comare them
+3. Make score counter
+4. Maybe make a list to choose which charater to ask questions too nah thats too much
+5. Making timer that begins the whole thing -- nvm
+6. I could make the selection thing to choose characters
+*/
+
+var ques = ["error", "Green", "Naptime","error"];
+var fallacy = ["cb1","cb2","cb3","cb4","cb5","cb6","cb7","cb8"];
+var people = ["--Please Select a person--","Dave","Joan","Phill","Javier"];
+var queslist = [
+                ["start","1.Questions Will Apear Here.",], 
+                ["Dave","1. Green", "2. Blue", "3. Nap",], 
+                ["Joan","1. Holla","2. Naptime"], 
+                ["Phill","", "", "", ""], 
+                ["Javier","", "", "", ""], 
+                ["Javier"]];
+var timer = 10;
+var Uscore = 0;
+//var p = -1;
+//onStart();
+//function onStart()
+/*{
+    var unit = time();
+    if(unit == 10)
+    {
+        begin();
+    }
+}
+/* function time()
+{
+    timer--;
+    alert(timer);
+    if(time > 1){
+    var timer = setTimeout("time()", 100);
+    }
+
+    
+    return i;
+}*/
+function testscore(d, q)
+{
+//Fix testscore b/c rn it aint removing the choices after user has clicked//Fixed it 
+    if(d == 1)
+    {
+        Uscore++;
+        document.getElementById("blank").value = "Score: " + Uscore;
+        document.getElementById("Uquestion").value = "";
+    }
+    else if(d == 2)
+    {
+        Uscore--;
+        document.getElementById("blank").value = "Score: " + Uscore;
+        document.getElementById("Uquestion").value = "Sorry, Incorrect";
+    }
+    //document.getElementById("score").value = document.getElementById("score").value + Uscore;
+
+    /*if(document.getElementById("false") == 0)
+    {
+        document.getElementById("Uquestion").value = "Sorry Incorrect";
+    }*/
+    /*var p = -1;
+    while(p < fallacy.length)
+    {
+        document.getElementById(p).style.visibility = "hidden";
+        i++;
+    }*/
+    /*
+    var Uq = document.getElementById("Uquestion").value;
+    var Uval = findsponce(Uq);
+    document.getElementById(fallacy[Uval]).style.visibility = "hidden";
+    document.getElementById("info").style.visibility = "hidden";
+    document.getElementById("Uquestion").value = "";
+    */
+    if(Uscore > 2)
+    {
+        //It works but for some reason only the table will dissapear but nothing happens and its kinda odd
+        document.getElementById("mesa", "info", "intro", "butt", "choices").style.visibility = "hidden";
+        document.getElementById("win").style.visibility = "visible";
+        
+    }
+}
+function uncheck()
+{
+    var i=0;
+    while(i < fallacy.length)
+    {
+        document.getElementById(fallacy[i]).checked = false;
+        i++;
+    }
+}
+function respond()
+{
+
+    var Uq = document.getElementById("Uquestion").value;
+    var Uval = findsponce(1, Uq);
+    //alert(resp[Uval]);
+    //resp[Uval].style.visibility = "visible";
+    
+    //document.getElementById("Bresponse").value = "Here are your questions";
+    document.getElementById(fallacy[Uval]).style.visibility = "visible";
+    document.getElementById("info").style.visibility = "visible";
+    //display();
+}
+function findsponce(l, f)
+{
+    var i = -1;
+    var carrot = 0;
+    if(l == 1)
+    {
+        while(i < ques.length)
+        {
+            if(f == ques[i])
+            {
+                carrot = i;
+            }
+            i++;
+        }
+        return carrot;
+        if(i > ques.length)
+        {
+            carrot = 0;
+            i = -1;
+        }
+        
+        
+    }
+    if(l == 2)
+    {
+        var p = -1;
+        var potato = 0;
+        while(p < people.length)
+        {
+            if(f == people[p])
+            {
+                potato = p;
+                
+            }
+            p++;
+        }
+        return potato;
+        if(p > people.length)
+        {
+            potato = p;
+            p = -1;
+        }
+        
+    }
+}
+/*function fail()
+{
+    document.getElementById("blank").value = "Score: " + Uscore;
+    //document.getElementById("score").value = document.getElementById("score").value + Uscore;
+    var Uq = document.getElementById("Uquestion").value;
+    var Uval = findsponce(Uq);
+    document.getElementById(fallacy[Uval]).style.visibility = "hidden";
+    document.getElementById("info").style.visibility = "hidden";
+    document.getElementById("Uquestion").value = "Sorry, Incorrect";
+    /*var i = 1;
+    while(i < fallacy.length)
+    {
+        document.getElementById(i).style.visibility = "hidden";
+        i++;
+    }
+    
+}*/
+function load()
+{
+	var sum = 0;
+	for(var i = 0; i<people.length; i++)
+    {
+        var daList = document.getElementById("pep");
+  		var option = document.createElement("option");
+  		option.text = people[i];
+  		daList.add(option);
+    }
+}
+function talk()
+{
+    var choice = document.getElementById("pep");
+    var choiceres = findsponce(2, choice.value);
+    if(choiceres == -1)
+    {
+    alert("error");
+    }
+    else
+    {
+    loadchoice(choiceres);
+    }
+}
+function loadchoice(w)
+{
+//This function will change the background and stuff for each of the characters
+//Also maybe make bgrounds and stuff to pretty it up
+//This should also change the list
+    var m = 1;
+    if(w == 0)
+    {
+        document.body.style.background = "pink";
+        document.getElementById("mesa").style.background = "darkpink";
+        //document.getElementById("mipregun1").textContent = "Here are your questions<br>1. Green <br> 2. Naptime";
+        /*while(m < queslist[w].length)
+        {
+        document.getElementById("mipregun"+m).textContent = queslist[w][m];
+        m++;
+        }*/
+    }
+    else if(w == 1)
+    {
+    document.body.style.background = "purple";
+    document.getElementById("mesa").style.background = "yellow";
+    }
+    else if(w == 2)
+    {
+    document.body.style.background = "lightblue";
+    document.getElementById("mesa").style.background = "blue";
+    
+    }
+    while(m < queslist[w].length)
+    {
+        document.getElementById("mipregun"+m).textContent = queslist[w][m];
+        m++;
+    }
+}
+
+//Note: The <form> thingy bellow was learned from https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click
+</script>
+<style>
+/* 
+    Here are the links to how I figured out how to add CSS even though we didn't neccisarily learn to much about it in class
+    
+    https://stackoverflow.com/questions/19561585/how-to-make-div-go-behind-another-div/19561747
+    
+    https://www.w3schools.com/css/css_howto.asp
+*/
+.textbox{
+    color: black;
+    position:static;
+    border:3px solid black; 
+    width:810px; 
+    background-color: solid white; 
+    opacity: 1; 
+    z-index: 100;
+    bottom:100px;
+    box-shadow:5px 5px;
+}
+#choices{
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:200; 
+    visibility:visible
+}
+.cbox{
+    position: relative;
+    width:400;
+    flex-direction: row;
+    /*position:absolute; 
+    overflow:scroll; 
+    top:50; 
+    left:200; 
+    width:400; 
+    height: 200; 
+    visibility:visible;
+    grid: 1 / 2;*/
+}
+
+.rightcol{
+    float: right;
+    right:0px;
+    position: fixed;
+    top:0px;
+    display: flex;
+    justify-content: center;
+    height: 600px;
+    width: 20%;
+    background-color: teal;
+    flex-direction: column;
+    border: 5px solid white;
+    margin:0px;
+    padding:0px;
+}
+#intro{
+    border-bottom: 5px solid white;
+}
+#mipregun0{
+    align-items:center;
+    top:5px;
+    text-decoration-line: underline;
+}
+.miques{
+    display:flex;
+    position:relative;
+    align-content: flex-end;
+    flex-direction: column;
+    height: 200px;
+    background-color:teal;
+    
+}
+.fallacy{
+    display:flex;
+    float: right;
+    position: relative;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 400px;
+    background-color:blue;
+
+}
+#lfintro{
+    align-items:center;
+    top: 5px;
+    text-decoration-line: underline;
+}
+</style>
+
+<div id ="info"style="">Click the correct logical fallacy</div>
+<div class="rightcol">
+
+<div class="miques"id="intro" style="">
+    <span class="miques" id ="mipregun0">Here are your questions!</span> <br/> 
+    <span class="miques"id ="mipregun1">1. Green </span><br/> 
+    <span class="miques"id ="mipregun2">2. Naptime </span><br/>
+</div>
+<div class="fallacy">
+<div id="lfintro">Here are the logical fallacys</div>
+<br/>
+<div class="cbox">
+<form>
+    <input type ="checkbox" id="cb1" onmouseover="start()" onclick="testscore(2, cb1)">Lorem<br/><br/>
+    <input type ="checkbox" id="cb2" onmouseover="start()" onclick="testscore(1, cb2)">correct<br/><br/>
+    <input type ="checkbox" id="cb3" onmouseover="start()" onclick="testscore(2, cb3)">I<br/><br/>
+    <input type ="checkbox" id="cb4" onmouseover="start()" onclick="testscore(2, cb4)">made<br/><br/>
+
+    <input type ="checkbox" id="cb5" onmouseover="start()" onclick="testscore(2, cb5)">Lorem<br/><br/>
+    <input type ="checkbox" id="cb6" onmouseover="start()" onclick="testscore(2, cb6)">have<br/><br/>
+    <input type ="checkbox" id="cb7" onmouseover="start()" onclick="testscore(1, cb7)">correct<br/><br/>
+    <input type ="checkbox" id="cb8" onmouseover="start()" onclick="testscore(2, cb8)">made <br/><br/>
+</form>
+</div>
+</div>
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+<div class="textbox"id="mesa" style="">
+	<tr height = 12>
+		<td style="background-color: solid white; position: relative;"> 	
+            <input id="blank" type="text" size="45" readonly = "true"/><input id="blank2" type="text" size="45" readonly = "true"/>
+        </td>
+	</tr>
+	<tr height = "12"><td><td>
+	</tr>
+	<tr>
+		<td>	<input id="Uquestion" type="text" size="95" value="Please enter a question" style="width:810px"/> </td>
+	</tr>
+
+</div>
+
+<br/><br/>
+<input id="butt" type="button" value="Begin" onclick="respond()"/>
+<input id="butt2" type="button" value="Clear Checks" onclick="uncheck()"/>
+<table id="choices" border = 3 style="" bgcolor="darkgrey">
+	<tr>
+		<td>  	<select name="p1" id="pep" onfocusout="talk()"></select>	</td><br/><td><input type="button" value="Talk to" onclick="talk()"/></td>
+    </tr>
+</table>
+    
+<br/><br/>
+
+<img id="win" src = "images/Winscreen.png" style="position:absolute; overflow:scroll; top:100; left:600; width:200; height: 200; visibility:hidden"/>
+<br/><br/>
+</head>
+<body onload = "load()" bgcolor="lightgrey"> 
+<div>
+</div>
+</body>
+</html>
