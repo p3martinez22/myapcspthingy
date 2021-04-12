@@ -13,9 +13,23 @@
 8. Make charaters get displayed
 9. Make the quesitons work so that when a fallacy is clicked it compares it to the question which it then finds a value from to compare to a list that has the correct annswer to find if its correct and then if it's correct make everything visible that was invisible
 10. This means totally changing tetscore and as a result probably find sponce too
+11. Need to fix selecting other charaters and having their questions display, or at least test it idk if it's broken
+12. Also need to add instriuctions at the top
+13. Nedd to make the quesitons
 */
 
-var ques = ["error", "Green", "Naptime","error"];
+var ques = [
+                ["start","Questions Will Apear Here",], 
+                ["Dave","Green", "Blue", "Nap",], 
+                ["Joan","Holla","Naptime"], 
+                ["Phill","Height", "Blue", "", ""], 
+                ["Javier","Chips", "Ink", "", ""]];
+var sent = [
+                ["The sentences will apear here",],
+                ["Dave","Grewn sentence","Blue Sentence","Nap Sentence",],
+                ["Joan","Holla sentence","Naptime sentence","",""],
+                ["Phill","Height sentence", "Blue sentence"],
+                ["Javier","Chips sentence","Ink sentence"]];
 var fallacy = ["cb1","cb2","cb3","cb4","cb5","cb6","cb7","cb8"];
 var people = ["--Please Select a person--","Dave","Joan","Phill","Javier"];
 var queslist = [
@@ -32,6 +46,8 @@ var quesans = [
                 ["Phill","slipslope", "strawman",],
                 ["Javier","oversimplify","bandwagon"]];
 var timer = 10;
+var Pselected =  1;
+var Cques = 1;
 var Uscore = 0;
 //var p = -1;
 //onStart();
@@ -50,14 +66,34 @@ var Uscore = 0;
     if(time > 1){
     var timer = setTimeout("time()", 100);
     }
-
     
     return i;
 }*/
 function testscore(d, q)
 {
-//Fix testscore b/c rn it aint removing the choices after user has clicked//Fixed it nvm 
-    if(d == 1)
+//Fix testscore b/c rn it aint removing the choices after user has clicked//Fixed it -- nvm Need to redo the whole than 
+//Q should be the 
+    if(q == quesans[Pselected][Cques])
+    {
+        alert("Correct!");
+        Uscore++;
+        document.getElementById("blank").value ="Score "+ Uscore;
+        document.getElementById("sentbox").value = "Correct!";
+        document.getElementById("Uquestion").value = "";
+    }   
+    else
+    {
+        alert("sorry incorrect");
+        document.getElementById("Uquestion").value = "Sorry Incorrect"
+        if(Uscore > 0)
+        {
+            Uscore--;
+        }
+        document.getElementById("cb"+d).style.visibility = "hidden";
+    } 
+
+
+/*if(d == 1)
     {
         Uscore++;
         document.getElementById("blank").value = "Score: " + Uscore;
@@ -68,7 +104,7 @@ function testscore(d, q)
         Uscore--;
         document.getElementById("blank").value = "Score: " + Uscore;
         document.getElementById("Uquestion").value = "Sorry, Incorrect";
-    }
+    }*/
     document.getElementById(q).style.visibility="hidden";
     //document.getElementById("score").value = document.getElementById("score").value + Uscore;
 
@@ -103,6 +139,7 @@ function uncheck()
     while(i < fallacy.length)
     {
         document.getElementById(fallacy[i]).checked = false;
+        document.getElementById(fallacy[i]).style.visibility = "visible";
         i++;
     }
 }
@@ -111,8 +148,9 @@ function respond()
 
     var Uq = document.getElementById("Uquestion").value;
     var Uval = findsponce(1, Uq);
-    
-    document.getElementById(fallacy[Uval]).style.visibility = "visible";
+    Cques = Uval;
+    document.getElementById("sentbox").value = sent[Pselected][Uval];
+    //document.getElementById(sent[Pselected][Uval]).style.visibility = "visible";
     document.getElementById("info").style.visibility = "visible";
     //display();
 }
@@ -122,11 +160,12 @@ function findsponce(l, f)
     var carrot = 0;
     if(l == 1)
     {
-        while(i < ques.length)
+        while(i < ques[Pselected].length)
         {
-            if(f == ques[i])
+            if(f == ques[Pselected][i])
             {
                 carrot = i;
+                alert("carrot");
             }
             i++;
         }
@@ -331,7 +370,7 @@ function loadchoice(w)
 <div id ="info"style="">Click the correct logical fallacy</div>
 <div class="rightcol">
 
-<div class="miques"id="intro" style="">
+<div class="miques"id="intro">
     <span class="miques" id ="mipregun0">Here are your questions!</span> <br/> 
     <span class="miques"id ="mipregun1">1. Green </span><br/> 
     <span class="miques"id ="mipregun2">2. Naptime </span><br/>
@@ -341,15 +380,15 @@ function loadchoice(w)
 <br/>
 <div class="cbox">
 <form>
-    <input type ="checkbox" id="cb1" onmouseover="start()" onclick="testscore(2, cb1)">Lorem<br/><br/>
-    <input type ="checkbox" id="cb2" onmouseover="start()" onclick="testscore(1, cb2)">correct<br/><br/>
-    <input type ="checkbox" id="cb3" onmouseover="start()" onclick="testscore(2, cb3)">I<br/><br/>
-    <input type ="checkbox" id="cb4" onmouseover="start()" onclick="testscore(2, cb4)">made<br/><br/>
+    <input type ="checkbox" id="cb1" onmouseover="start()" onclick="testscore(1, 'presumption')">Fallacy of Presumption<br/><br/>
+    <input type ="checkbox" id="cb2" onmouseover="start()" onclick="testscore(2, 'bandwagon')">Fallacy of Bandwagon<br/><br/>
+    <input type ="checkbox" id="cb3" onmouseover="start()" onclick="testscore(3, 'general')">Fallacy of Generalization<br/><br/>
+    <input type ="checkbox" id="cb4" onmouseover="start()" onclick="testscore(4, 'red')">Fallacy of Redhering<br/><br/>
 
-    <input type ="checkbox" id="cb5" onmouseover="start()" onclick="testscore(2, cb5)">Lorem<br/><br/>
-    <input type ="checkbox" id="cb6" onmouseover="start()" onclick="testscore(2, cb6)">have<br/><br/>
-    <input type ="checkbox" id="cb7" onmouseover="start()" onclick="testscore(1, cb7)">correct<br/><br/>
-    <input type ="checkbox" id="cb8" onmouseover="start()" onclick="testscore(2, cb8)">made <br/><br/>
+    <input type ="checkbox" id="cb5" onmouseover="start()" onclick="testscore(5, 'halftruth')">Fallacy of halftruth<br/><br/>
+    <input type ="checkbox" id="cb6" onmouseover="start()" onclick="testscore(6, 'slipslope')">Fallacy of Slipslope<br/><br/>
+    <input type ="checkbox" id="cb7" onmouseover="start()" onclick="testscore(7, 'strawman')">Fallacy of Strawman<br/><br/>
+    <input type ="checkbox" id="cb8" onmouseover="start()" onclick="testscore(8, 'bandwagon')">Fallacy of Oversimplification<br/><br/>
 </form>
 </div>
 </div>
@@ -358,10 +397,10 @@ function loadchoice(w)
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/>
 
-<div class="textbox"id="mesa" style="">
+<div class="textbox"id="mesa" >
 	<tr height = 12>
 		<td style="background-color: solid white; position: relative;"> 	
-            <input id="blank" type="text" size="45" readonly = "true"/><input id="blank2" type="text" size="45" readonly = "true"/>
+            <input id="blank" type="text" size="45" readonly = "true"/><input id="sentbox" type="text" size="45" readonly = "true"/>
         </td>
 	</tr>
 	<tr height = "12"><td><td>
@@ -375,7 +414,7 @@ function loadchoice(w)
 <br/><br/>
 <input id="butt" type="button" value="Begin" onclick="respond()"/>
 <input id="butt2" type="button" value="Clear Checks" onclick="uncheck()"/>
-<table id="choices" border = 3 style="" bgcolor="darkgrey">
+<table id="choices" border = 3 bgcolor="darkgrey">
 	<tr>
 		<td>  	<select name="p1" id="pep" onfocusout="talk()"></select>	</td><br/><td><input type="button" value="Talk to" onclick="talk()"/></td>
     </tr>
