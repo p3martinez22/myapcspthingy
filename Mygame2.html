@@ -55,6 +55,7 @@ var Pselected =  0;
 var Cques = 1;
 var Uscore = 0;
 var norep = 0;
+var instdisplay=1;
 //var p = -1;
 //onStart();
 //function onStart()
@@ -81,7 +82,7 @@ function testscore(d, q)
 //Q should be the 
     if(q == quesans[Pselected][Cques])
     {
-        alert("Correct!");
+        //alert("Correct!");
         Uscore++;
         document.getElementById("blank").value ="Score "+ Uscore;
         document.getElementById("sentbox").value = "Correct!";
@@ -91,16 +92,27 @@ function testscore(d, q)
         ques[Pselected][Cques] = "error";
         quesans[Pselected][Cques] = "Question Unavailible";
         norep = 0;
+            if(Uscore > 2)
+            {
+                //It no work??????
+                document.getElementById("mesa").style.visibility = "hidden";
+                document.getElementById("winner").style.visibility = "visible";  
+                document.getElementById("butt").style.visibility="hidden";
+                document.getElementById("butt2").style.visibility="hidden";
+                document.getElementById("sentbox").value = "You've won!!!!";
+                document.getElementById("pep").style.visibility="hidden";
+                //document.getElementById("win").style.visibility = "visible";        
+            }
         talk();
     }   
     else
     {
-        alert("sorry incorrect");
-        document.getElementById("sentbox").value = "Sorry Incorrect"
+        //alert("sorry incorrect");
+        document.getElementById("sentbox").value = "Sorry Incorrect";
         if(Uscore > 0)
         {
             Uscore--;
-            document.getElementById("blank").value="Score"+Uscore;
+            document.getElementById("blank").value="Score "+Uscore;
         }
         document.getElementById("cb"+d).style.visibility = "hidden";
     } 
@@ -138,10 +150,14 @@ function testscore(d, q)
     */
     if(Uscore > 2)
     {
-        //It works but for some reason only the table will dissapear but nothing happens and its kinda odd
-        document.getElementById("mesa").style.visibility = "hidden";
-        document.getElementById("win").style.visibility = "visible";
-        
+        //It no work??????
+        //document.getElementById("mesa").style.visibility = "hidden";
+        document.getElementById("winner").style.visibility = "visible";  
+        document.getElementById("butt").style.visibility="hidden";
+        document.getElementById("butt2").style.visibility="hidden";
+        document.getElementById("sentbox").value = "You've won!!!!";
+        document.getElementById("pep").style.visibility="hidden";
+        //document.getElementById("win").style.visibility = "visible";        
     }
 }
 function uncheck(q)
@@ -154,25 +170,25 @@ function uncheck(q)
         while(i < fallacy.length)
         {
             document.getElementById(fallacy[i]).checked = false;
-            if(q == 1)
+            /*if(q == 1)
             {
                 document.getElementById(fallacy[i]).style.visibility = "visible";
             }
             if(q == 2)
-            {
+            {*/
                 document.getElementById(fallacy[i]).style.visibility = "hidden";
-            }
+            //}
             i++;
         }
-        if(q == 2)
+        /*if(q == 2)
         {
             docuemnt.getElementById("sentbox").value = "Please select another question";
-        }
+        }*/
+        document.getElementById("sentbox").value = "Please select another question"
     }
 }
 function respond()
 {
-    var i = -1;
     var Uq = document.getElementById("Uquestion").value;
     var Uval = findsponce(1, Uq);
     Cques = Uval;
@@ -181,10 +197,16 @@ function respond()
         if(Uval < ques[Pselected].length)
         {
             document.getElementById("sentbox").value = sent[Pselected][Uval];
-            document.getElementById("info").style.visibility = "visible";
-            uncheck(1);
+            //document.getElementById("info").style.visibility = "visible";
             //Need to figre out how to make the fallacys go visible when hit the begin button but rn the uncheck function is kinda hindering it I could make another function rather than uncheck() -- Fixed it :)
             document.getElementById("butt").style.visibility = "hidden";
+            //document.getElementsByClassName(".rightcol").style.visibility="visible";
+            //uncheck(1);
+            for(var i = 0; i < fallacy.length; i++)
+            {
+                document.getElementById(fallacy[i]).style.visibility="visible";
+            }
+            //document.getElementById("butt2").style.visibility="visible";
         }
     } 
     else
@@ -285,7 +307,7 @@ function talk()
     }
     else
     {
-        //Pselected = choiceres;
+        Pselected = choiceres;
         loadchoice(choiceres);
     }
 }
@@ -333,7 +355,19 @@ function loadchoice(w)
 
     }
 }
-
+function showinst()
+{
+    if(instdisplay == 1)
+    {
+        instdisplay = 0;
+        document.getElementById("insttext").style.visibility="visible";
+    }
+    else
+    {
+        instdisplay = 1;
+        document.getElementById("insttext").style.visibility="hidden";
+    }
+}
 //Note: The <form> thingy bellow was learned from https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click
 </script>
 <style>
@@ -365,12 +399,12 @@ function loadchoice(w)
     left:0px;
     width:230px; 
     height:50px;
-    border-radius: 30px;
+    border-radius: 60px;
     /*border:10px;*/
     display:flex;
     justify-content: center;
     border-color: red;
-    background-color: aqua;
+    background-color: rgba(3, 22, 73, 0.747);
     visibility:visible;
 }
 .cbox{
@@ -434,12 +468,34 @@ function loadchoice(w)
     top: 5px;
     text-decoration-line: underline;
 }
+#winner{
+    position: absolute;
+    display:flex;
+    top:0;
+    height:100vh;
+    width: 100%;
+    background-color: darkorchid;
+    left:0px;
+    z-index: 900;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    visibility: hidden;
+}
 /*.innerCbox{
     visibility: hidden;
 }*/
 </style>
-
-<div id ="info"style="">Click the correct logical fallacy</div>
+<div id="winner">You've won!!!</div>
+<div id="insttext" style="position: absolute; top: 32%; visibility: hidden;">
+    <span style="text-decoration: underline;">Instructions</span><br/>
+    1. Select a person <br/>
+    2. Type an Avalible Question<br/>
+    3. Select a logical fallacy <br/>
+    4. When correct click the Clear Checks Button<br/>
+    5. Repeat and try to get a score of 3!!
+</div>
+<!--<div id ="info"style="">Click the correct logical fallacy</div>-->
 <div class="rightcol">
 
 <div class="miques"id="intro">
@@ -486,6 +542,7 @@ function loadchoice(w)
 <br/><br/>
 <input id="butt" type="button" value="Begin" onclick="respond()"/>
 <input id="butt2" type="button" value="Clear Checks" onclick="uncheck(2)" style="visibility: hidden;"/>
+<input id = "inst" type="button" value="Instructions" onClick="showinst()" />
 <div class="bottle">
     <select name="p1" id="pep" onChange="talk()"></select>
 </div>
