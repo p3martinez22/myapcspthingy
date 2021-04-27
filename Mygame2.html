@@ -124,23 +124,31 @@ function respond()
         if(Uval < ques[Pselected].length)
         {
             document.getElementById("sentbox").value = sent[Pselected][Uval];
-            //document.getElementById("info").style.visibility = "visible";
-            //Need to figre out how to make the fallacys go visible when hit the begin button but rn the uncheck function is kinda hindering it I could make another function rather than uncheck() -- Fixed it :)
             document.getElementById("butt").style.visibility = "hidden";
-            //document.getElementsByClassName(".rightcol").style.visibility="visible";
-            //uncheck(1);
             for(var i = 0; i < fallacy.length; i++)
             {
                 document.getElementById(fallacy[i]).style.visibility="visible";
             }
-            //document.getElementById("butt2").style.visibility="visible";
         }
     } 
     else
     {
         document.getElementById("sentbox").value = "Sorry, That is not an available quesiton";
     }
-    //display();
+}
+function talk()
+{
+    var choice = document.getElementById("pep");
+    var choiceres = findsponce(2, choice.value);
+    if(choiceres == -1)
+    {
+    alert("error");
+    }
+    else
+    {
+        Pselected = choiceres;
+        loadchoice(choiceres);
+    }
 }
 function findsponce(l, f)
 {
@@ -204,21 +212,7 @@ function hide()
         i++;
     }
 }
-function talk()
-{
-    var choice = document.getElementById("pep");
-    var choiceres = findsponce(2, choice.value);
-    //alert(choiceres);
-    if(choiceres == -1)
-    {
-    alert("error");
-    }
-    else
-    {
-        Pselected = choiceres;
-        loadchoice(choiceres);
-    }
-}
+
 function loadchoice(w)
 {
 //This function will change the background and stuff for each of the characters
