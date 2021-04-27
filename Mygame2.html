@@ -2,28 +2,6 @@
 <head> 
 
 <script language="JavaScript">
-/*Agenda
-1. Make a list of questons for the user, maybe i can but it in the top box
-2. Select correct logical fallacy and answer and way to comare them
-3. Make score counter
-4. Maybe make a list to choose which charater to ask questions too nah thats too much
-5. Making timer that begins the whole thing -- nvm
-6. I could make the selection thing to choose characters
-7. Make the things turn invisible when they get clicked
-8. Make charaters get displayed
-9. Make the quesitons work so that when a fallacy is clicked it compares it to the question which it then finds a value from to compare to a list that has the correct annswer to find if its correct and then if it's correct make everything visible that was invisible
-10. This means totally changing tetscore and as a result probably find sponce too
-11. Need to fix selecting other charaters and having their questions display, or at least test it idk if it's broken
-12. Also need to add instriuctions at the top
-13. Nedd to make the quesitons
-14. Make it so button disapeares and reapears as needed
-15. Make the available questions non repeatable -- This likely means removing the element from the array
-16. Also make it so it says "Not an availible question when it types things wrong"
-17. Need to make it so User when click the fallacys before time or the button before enter question that it does nothing
-18. Make the fallacys hidden on load with the hide() finction -- done
-19. I somehow broke the Phill and haviers questions because it wont change the display in the green box when he selected so go take a look at that please
-*/
-
 var ques = [
                 ["start","Questions Will Apear Here",], 
                 ["Dave","Green", "Blue", "Nap",], 
@@ -56,26 +34,6 @@ var Cques = 1;
 var Uscore = 0;
 var norep = 0;
 var instdisplay=1;
-//var p = -1;
-//onStart();
-//function onStart()
-/*{
-    var unit = time();
-    if(unit == 10)
-    {
-        begin();
-    }
-}
-/* function time()
-{
-    timer--;
-    alert(timer);
-    if(time > 1){
-    var timer = setTimeout("time()", 100);
-    }
-    
-    return i;
-}*/
 function testscore(d, q)
 {
 //Fix testscore b/c rn it aint removing the choices after user has clicked//Fixed it -- nvm Need to redo the whole than 
@@ -116,38 +74,7 @@ function testscore(d, q)
         }
         document.getElementById("cb"+d).style.visibility = "hidden";
     } 
-/*if(d == 1)
-    {
-        Uscore++;
-        document.getElementById("blank").value = "Score: " + Uscore;
-        document.getElementById("Uquestion").value = "";
-    }
-    else if(d == 2)
-    {
-        Uscore--;
-        document.getElementById("blank").value = "Score: " + Uscore;
-        document.getElementById("Uquestion").value = "Sorry, Incorrect";
-    }*/
     document.getElementById(q).style.visibility="hidden";
-    //document.getElementById("score").value = document.getElementById("score").value + Uscore;
-
-    /*if(document.getElementById("false") == 0)
-    {
-        document.getElementById("Uquestion").value = "Sorry Incorrect";
-    }*/
-    /*var p = -1;
-    while(p < fallacy.length)
-    {
-        document.getElementById(p).style.visibility = "hidden";
-        i++;
-    }*/
-    /*
-    var Uq = document.getElementById("Uquestion").value;
-    var Uval = findsponce(Uq);
-    document.getElementById(fallacy[Uval]).style.visibility = "hidden";
-    document.getElementById("info").style.visibility = "hidden";
-    document.getElementById("Uquestion").value = "";
-    */
     if(Uscore > 2)
     {
         //It no work??????
@@ -256,23 +183,6 @@ function findsponce(l, f)
         
     }
 }
-/*function fail()
-{
-    document.getElementById("blank").value = "Score: " + Uscore;
-    //document.getElementById("score").value = document.getElementById("score").value + Uscore;
-    var Uq = document.getElementById("Uquestion").value;
-    var Uval = findsponce(Uq);
-    document.getElementById(fallacy[Uval]).style.visibility = "hidden";
-    document.getElementById("info").style.visibility = "hidden";
-    document.getElementById("Uquestion").value = "Sorry, Incorrect";
-    /*var i = 1;
-    while(i < fallacy.length)
-    {
-        document.getElementById(i).style.visibility = "hidden";
-        i++;
-    }
-    
-}*/
 function load()
 {
 	var sum = 0;
@@ -287,8 +197,6 @@ function load()
 }
 function hide()
 {
-    /*document.getElementsByClassName("innerCbox")
-    for(var i=0; )*/
     var i = 0;
     while(i < fallacy.length)
     {
@@ -321,12 +229,6 @@ function loadchoice(w)
     {
         document.body.style.background = "pink";
         document.getElementById("mesa").style.background = "darkpink";
-        //document.getElementById("mipregun1").textContent = "Here are your questions<br>1. Green <br> 2. Naptime";
-        /*while(m < queslist[w].length)
-        {
-        document.getElementById("mipregun"+m).textContent = queslist[w][m];
-        m++;
-        }*/
     }
     else if(w == 2)
     {
@@ -368,16 +270,8 @@ function showinst()
         document.getElementById("insttext").style.visibility="hidden";
     }
 }
-//Note: The <form> thingy bellow was learned from https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click
 </script>
 <style>
-/* 
-    Here are the links to how I figured out how to add CSS even though we didn't neccisarily learn to much about it in class
-    
-    https://stackoverflow.com/questions/19561585/how-to-make-div-go-behind-another-div/19561747
-    
-    https://www.w3schools.com/css/css_howto.asp
-*/
 .textbox{
     color: black;
     position:static;
