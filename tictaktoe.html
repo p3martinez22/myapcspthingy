@@ -1,0 +1,74 @@
+<html>
+<head>
+<script language="JavaScript">
+function change(b)
+{
+    //alert("hola");
+    document.getElementById(b).style.backgroundColor = "grey";
+    bobturn(b);
+}
+function bobturn(b)
+{
+    var rand = 0;
+    var sbox = document.getElementById(b).style.backgroundColor;
+    rand = Math.random()*9;
+    rand = Math.floor(rand);
+    
+    if(sbox !== "grey" && !== "purple")
+    {
+        sbox = "purple";
+    }
+    else
+    {
+        
+    }
+}
+</script>
+<style>
+.cont{
+    background-color:blue;
+    height: 500px;
+    width: 500px;
+    display: flex;
+    /*align-items:center;*/
+    justify-content:center;
+}
+.incont{
+    display:flex;
+    flex-wrap:none;
+    background-color:red;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    margin: 10px;
+}
+.row1{
+    width: 1fr;
+    height:30px;
+    background-color: green;
+    margin: 10px;
+}
+</style>
+</head>
+<body>
+<center>
+<div class="cont">
+    <div class="row1">
+        <div class="incont" id="box1" onClick="change('box1')">1</div>
+        <div class="incont" id="box2" onClick="change('box2')">2</div>
+        <div class="incont" id="box3" onClick="change('box3')">3</div>
+    </div>
+    <div class="row1">
+        <div class="incont" id="box4" onClick="change('box4')">4</div>
+        <div class="incont" id="box5" onClick="change('box5')">5</div>
+        <div class="incont" id="box6" onClick="change('box6')">6</div>
+    </div>
+    <div class="row1">
+        <div class="incont" id="box7" onClick="change('box7')">7</div>
+        <div class="incont" id="box8" onClick="change('box8')">8</div>
+        <div class="incont" id="box9" onClick="change('box9')">9</div>
+    </div>
+</div>
+</center>
+</body>
+</html>
